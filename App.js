@@ -36,9 +36,8 @@ const AppContainer = createAppContainer(BottomTabNavigator);
 
 export default class App extends React.Component {
   render() {
-    debugger;
     return (
-      <Provider favorites={stores.favorites}>
+      <Provider {...stores}>
         <AppContainer />
       </Provider>
     );

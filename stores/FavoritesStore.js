@@ -1,16 +1,36 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, createTransformer } from 'mobx';
 import { AsyncStorage } from 'react-native';
 
 export default class FavoritesStore {
   @observable favorites = [];
 
-  @action addFavoriteBusStop(busStop) {
-    this.favorites.push(busStop);
+  favoritesCache = new Map();
+
+  @computed get favorites() {
+    return this.favorites;
   }
 
-  @action removeFavoriteBusStop(busStop) {
-    this.favorites = this.favorites.filter(elem => elem !== busStop);
+  // @computed get isFavorite() {
+  //   return createTransformer(busStop => this.favorites.includes(busStop));
+  // }
+
+  @action addFavoriteBusStop(busStopID) {
+    this.favorites.push(busStopID);
+    // saveFavorites();
   }
+
+  @action removeFavoriteBusStop(busStopID) {
+    this.favorites = this.favorites.filter(elem => elem !== busStopID);
+    // saveFavorites();
+  }
+
+  isFavorite = busStopID => {
+    const computedFilter = computed(() => this.favorites.includes(busStopID));
+
+    this.favoritesCache.set(busStopID, computedFilter);
+
+    return this.favoritesCache.get();
+  };
 
   async saveFavorites() {
     try {

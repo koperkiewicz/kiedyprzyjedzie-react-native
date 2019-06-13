@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { inject, observe } from 'mobx-react';
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { inject, observer } from 'mobx-react';
 import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-// @inject('favorites')
-// @observe
+@inject('favoritesStore')
+@observer
 export default class BusStopHeader extends Component {
+  _handleClickFavorite = () => {
+    console.log('_handleClickFavorite');
+
+    const { favoritesStore, busStop } = this.props;
+    const favorite = favoritesStore.isFavorite(busStop);
+
+    if (!favorite) {
+      favoritesStore.addFavoriteBusStop(busStop.id);
+    } else {
+      favoritesStore.removeFavoriteBusStop(busStop.id);
+    }
+  };
+
   render() {
+    const { favoritesStore, busStop } = this.props;
+    const favorite = favoritesStore.isFavorite(busStop);
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Departures</Text>
-        <Icon name="star-o" size={20} color="#333333" />
+        <TouchableWithoutFeedback onPress={this._handleClickFavorite}>
+          <Icon name={favorite ? 'star' : 'star-o'} size={20} color="#333333" />
+        </TouchableWithoutFeedback>
       </View>
     );
   }

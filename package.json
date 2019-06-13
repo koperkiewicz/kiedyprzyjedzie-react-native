@@ -5,10 +5,12 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "rndebugger-open"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "global": "^4.3.2",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
     "react": "16.8.3",
@@ -31,6 +33,7 @@
     "eslint": "^5.16.0",
     "jest": "^24.5.0",
     "metro-react-native-babel-preset": "^0.53.1",
+    "react-native-debugger-open": "^0.3.19",
     "react-test-renderer": "16.8.3"
   },
   "jest": {

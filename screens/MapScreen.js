@@ -54,7 +54,7 @@ export default class MapScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ClusteredMapView
+        {/* <ClusteredMapView
           style={{ flex: 1 }}
           data={this.state.busStops}
           initialRegion={{
@@ -68,8 +68,8 @@ export default class MapScreen extends React.Component {
           }}
           renderMarker={this.renderMarker}
           renderCluster={this.renderCluster}
-        />
-        {/* <MapView
+        /> */}
+        <MapView
           initialRegion={{
             latitude: 50.668596,
             longitude: 17.928808,
@@ -94,7 +94,7 @@ export default class MapScreen extends React.Component {
               />
             );
           })}
-        </MapView> */}
+        </MapView>
       </View>
     );
   }
@@ -103,7 +103,9 @@ export default class MapScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    height: 400,
+    width: 400
   },
   map: {
     ...StyleSheet.absoluteFillObject

@@ -12,8 +12,12 @@ export default class BusStopScheduleScreen extends React.Component {
   //   };
   // };
 
-  static navigationOptions = {
-    headerTitle: <BusStopHeader />
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: (
+        <BusStopHeader busStop={navigation.getParam('currentBusStop', null)} />
+      )
+    };
   };
 
   state = {
